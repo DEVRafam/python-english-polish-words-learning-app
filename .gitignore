@@ -1,4 +1,4 @@
 __pycache__
 sandbox.ipynb
-logs/progress/*
-logs/results/*
+logs/*
+data/main.json

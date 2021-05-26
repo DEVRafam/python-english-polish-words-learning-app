@@ -1,7 +1,7 @@
 if __name__ != "__main__":
     from config.rich_configuration import console
     from operator import itemgetter
-    from src.emphasize import emphasize
+    from src.emphasize import emphasize, confirmation
 
     class ProcessUsersAnswer:
         def __init__(self, answer, correct, answers_summary, question):
@@ -15,6 +15,12 @@ if __name__ != "__main__":
             for i in range(r):
                 print()
 
+        def redemption(self):
+            if self.correct == input("Powtorz wyraz: "):
+                confirmation("Dobrze!")
+            else:
+                console.print("[red]Zle![/]")
+
         def display_false(self):
             self.answers_summary["invalid"].append(self.question)
             correct, answer = itemgetter("correct", "answer")(vars(self))
@@ -27,6 +33,8 @@ if __name__ != "__main__":
                     explanation += emphasize(char)
             console.print(answer)
             console.print(explanation)
+
+            self.redemption()
 
         def display_true(self):
             self.answers_summary["valid"].append(self.question)
