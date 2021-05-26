@@ -20,6 +20,7 @@ if __name__ != "__main__":
             self.total_draws_count = 0
             self.answers_summary = {"valid": [], "invalid": []}
             self.data_for_logs = {
+                "accuraty": 0,
                 "deleted_words": [],
                 "words_made_strong": [],
                 "words_made_weak": [],
@@ -41,14 +42,15 @@ if __name__ != "__main__":
 
         def end_gameplay(self):
             end_time = time()
-            answers_summary, root_path = itemgetter("answers_summary", "root_path")(vars(self))
+            answers_summary, root_path, data_for_logs = itemgetter("answers_summary", "root_path", "data_for_logs")(
+                vars(self)
+            )
 
-            DisplaySummary(answers_summary).main()
-            points = self.make_analysis()
+            DisplaySummary(answers_summary, data_for_logs).main()
             SaveResultLog(
                 answers_summary=answers_summary,
                 root_path=root_path,
-                points=points,
+                points=self.make_analysis(),
                 numbers_of_draws=self.total_draws_count,
                 duration=end_time - self.start_time,
                 data_for_logs=self.data_for_logs,  #

@@ -12,7 +12,7 @@ if __name__ != "__main__":
             self.root_path = root_path
             self.points = points
             self.duration = duration
-            self.numbers_of_draws = (numbers_of_draws,)
+            self.numbers_of_draws = numbers_of_draws
             self.data_for_logs = data_for_logs
 
             self._log_name = None
@@ -31,7 +31,7 @@ if __name__ != "__main__":
                         "date": ctime(),
                         "session_duration[s]": round(self.duration),
                         "numbers_of_draws": self.numbers_of_draws,
-                        "accuracy": 0,
+                        "accuracy[%]": self.data_for_logs["accuraty"],
                         "invalid": self.answers_summary["invalid"],
                         "valid": self.answers_summary["valid"],
                         "points_generated_during_session": self.points,

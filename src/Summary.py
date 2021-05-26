@@ -10,16 +10,17 @@ if __name__ != "__main__":
             return 0
 
     class DisplaySummary:
-        def __init__(self, answers_summary):
-            invalid, valid = itemgetter("invalid", "valid")(answers_summary)
-
+        def __init__(self, answers_summary, data_for_logs):
             self.answers_summary = answers_summary
+            self.data_for_logs = data_for_logs
+
+            invalid, valid = itemgetter("invalid", "valid")(answers_summary)
             self.invalid = invalid
             self.valid = valid
-            self.accuraty = compute_accuraty(invalid=invalid, valid=valid)
+            self.data_for_logs["accuraty"] = compute_accuraty(invalid=invalid, valid=valid)
 
         def display_accuraty(self):
-            data = emphasize(self.accuraty)
+            data = emphasize(self.data_for_logs["accuraty"])
             console.print(f"Answer's accuraty: {data}%")
 
         def display_valid_answers(self):
